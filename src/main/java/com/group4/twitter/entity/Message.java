@@ -11,36 +11,36 @@ import java.util.Date;
 public class Message {
 
     @Id
-    @Column
+    @Column(name = "message_id")
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int messageId;
 
-    @Column
+    @Column(name = "body")
     private String body;
 
-    @Column
-    private String sender_email;
+    @Column(name = "sender_id")
+    private int senderId;
 
-    @Column
-    private String receiver_email;
+    @Column(name = "receiver_id")
+    private int receiverId;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy", timezone = "UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     @NotNull
     private Date date;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss", timezone = "UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss")
     @Temporal(TemporalType.TIME)
     @NotNull
     private Date time;
 
     public Message() {};
 
-    public Message(int messageId, String body, String sender_email, String receiver_email, Date date, Date time) {
+    public Message(int messageId, String body, int senderId, int receiverId, Date date, Date time) {
         this.messageId = messageId;
         this.body = body;
-        this.sender_email = sender_email;
-        this.receiver_email = receiver_email;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
         this.date = date;
         this.time = time;
     }
@@ -61,20 +61,20 @@ public class Message {
         this.body = body;
     }
 
-    public String getSender_email() {
-        return sender_email;
+    public int getSenderId() {
+        return senderId;
     }
 
-    public void setSender_email(String sender_email) {
-        this.sender_email = sender_email;
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
     }
 
-    public String getReceiver_email() {
-        return receiver_email;
+    public int getReceiverId() {
+        return receiverId;
     }
 
-    public void setReceiver_email(String receiver_email) {
-        this.receiver_email = receiver_email;
+    public void setReceiverId(int receiverId) {
+        this.receiverId = receiverId;
     }
 
     public Date getDate() {
@@ -98,8 +98,8 @@ public class Message {
         return "Message{" +
                 "messageId=" + messageId +
                 ", body='" + body + '\'' +
-                ", sender_email='" + sender_email + '\'' +
-                ", receiver_email='" + receiver_email + '\'' +
+                ", senderId=" + senderId +
+                ", receiverId=" + receiverId +
                 ", date=" + date +
                 ", time=" + time +
                 '}';

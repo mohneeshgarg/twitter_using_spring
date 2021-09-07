@@ -11,32 +11,32 @@ import java.util.Date;
 public class Tweet {
 
     @Id
-    @Column
+    @Column(name = "tweet_id")
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int tweetId;
 
-    @Column
-    private String text;
+    @Column(name = "body")
+    private String body;
 
-    @Column
-    private String owner_email;
+    @Column(name = "owner_id")
+    private int ownerID;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy", timezone = "UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     @NotNull
     private Date date;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss", timezone = "UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss")
     @Temporal(TemporalType.TIME)
     @NotNull
     private Date time;
 
     public Tweet() {};
 
-    public Tweet(int tweetId, String text, String owner_email, Date date, Date time) {
+    public Tweet(int tweetId, String body, int ownerID, Date date, Date time) {
         this.tweetId = tweetId;
-        this.text = text;
-        this.owner_email = owner_email;
+        this.body = body;
+        this.ownerID = ownerID;
         this.date = date;
         this.time = time;
     }
@@ -49,20 +49,20 @@ public class Tweet {
         this.tweetId = tweetId;
     }
 
-    public String getText() {
-        return text;
+    public String getBody() {
+        return body;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public String getOwner_email() {
-        return owner_email;
+    public int getOwnerID() {
+        return ownerID;
     }
 
-    public void setOwner_email(String owner_email) {
-        this.owner_email = owner_email;
+    public void setOwnerID(int ownerID) {
+        this.ownerID = ownerID;
     }
 
     public Date getDate() {
@@ -85,8 +85,8 @@ public class Tweet {
     public String toString() {
         return "Tweet{" +
                 "tweetId=" + tweetId +
-                ", text='" + text + '\'' +
-                ", owner_email='" + owner_email + '\'' +
+                ", body='" + body + '\'' +
+                ", ownerID=" + ownerID +
                 ", date=" + date +
                 ", time=" + time +
                 '}';

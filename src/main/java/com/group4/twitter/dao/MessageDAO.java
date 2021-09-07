@@ -9,11 +9,10 @@ import java.util.List;
 
 public interface MessageDAO extends JpaRepository<Message, Integer> {
 
-    @Query(value="SELECT m FROM twitter_message m WHERE m.sender_email = :sender_email", nativeQuery = true)
-    List<Message> findSentMessages(@Param("sender_email") String sender_email);
+    @Query(value="SELECT * FROM twitter_message WHERE sender_id = :sender_id", nativeQuery = true)
+    List<Message> findSentMessages(@Param("sender_id") int senderId);
 
-    @Query(value="SELECT m FROM twitter_message m WHERE m.receiver_email = :receiver_email", nativeQuery = true)
-    List<Message> findReceivedMessages(@Param("receiver_email")String receiver_email);
-
+    @Query(value="SELECT * FROM twitter_message WHERE receiver_id = :receiver_id", nativeQuery = true)
+    List<Message> findReceivedMessages(@Param("receiver_id") int receiverId);
 
 }

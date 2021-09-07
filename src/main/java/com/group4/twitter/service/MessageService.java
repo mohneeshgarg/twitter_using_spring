@@ -26,11 +26,11 @@ public class MessageService {
         return dao.findById(id).get();
     }
 
-    public List<Message> findSentMessages(String sender_email){
-        return dao.findSentMessages(sender_email);
+    public List<Message> findSentMessages(int senderId){
+        return dao.findSentMessages(senderId);
     }
 
-    public List<Message> findReceivedMessages(String receiver_email){
-        return dao.findReceivedMessages(receiver_email);
+    public List<Message> findReceivedMessages(int receiverId){
+        return dao.findReceivedMessages(receiverId);
     }
 }
