@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,8 +35,8 @@ public class MessageController {
     @Autowired
     MessageService messageService;
     @RequestMapping("/messages")
-    public ModelAndView openMessagePage(){
-        ModelAndView mv = new ModelAndView("messages");
+    public String openMessagePage(Model m){
+//        ModelAndView mv = new ModelAndView("messages");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = ((UserDetails)auth.getPrincipal()).getUsername();
         User user = userDAO.findByUserName(username);
@@ -46,12 +47,12 @@ public class MessageController {
 //        System.out.println(receivedMessages);
         List<Message> sentMessages = messageService.findSentMessages(user.getId());
         List<Message> receivedMessages = messageService.findReceivedMessages(user.getId());
-        mv.addObject("id", user.getId());
-        mv.addObject("sent", sentMessages);
-        mv.addObject("received", receivedMessages);
+        m.addAttribute("id", user.getId());
+        m.addAttribute("sent", sentMessages);
+        m.addAttribute("received", receivedMessages);
         System.out.println(sentMessages);
         System.out.println(receivedMessages);
-        return mv;
+        return "messages";
     }
     @GetMapping("/user/{id}/messages/new")
     public ModelAndView newMessage(@PathVariable int id){
