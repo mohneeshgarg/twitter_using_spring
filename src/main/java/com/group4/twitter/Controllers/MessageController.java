@@ -3,6 +3,7 @@ package com.group4.twitter.Controllers;
 import com.group4.twitter.DAO.UserDAO;
 import com.group4.twitter.Entities.Message;
 import com.group4.twitter.Entities.User;
+import com.group4.twitter.Services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -14,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class MessageController {
@@ -27,20 +31,26 @@ public class MessageController {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    MessageService messageService;
     @RequestMapping("/messages")
     public ModelAndView openMessagePage(){
         ModelAndView mv = new ModelAndView("messages");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = ((UserDetails)auth.getPrincipal()).getUsername();
         User user = userDAO.findByUserName(username);
-        String url = "http://localhost:8085/user/"+user.getId()+"/";
-        String sentMessages = restTemplate.getForObject(url+"message/sent", String.class);
-        String receivedMessages = restTemplate.getForObject(url+"message/received",  String.class);
+//        String url = "http://localhost:8085/user/"+user.getId()+"/";
+//        String sentMessages = restTemplate.getForObject(url+"message/sent", String.class);
+//        String receivedMessages = restTemplate.getForObject(url+"message/received",  String.class);
 //        System.out.println(sentMessages);
 //        System.out.println(receivedMessages);
+        List<Message> sentMessages = messageService.findSentMessages(user.getId());
+        List<Message> receivedMessages = messageService.findReceivedMessages(user.getId());
         mv.addObject("id", user.getId());
         mv.addObject("sent", sentMessages);
         mv.addObject("received", receivedMessages);
+        System.out.println(sentMessages);
+        System.out.println(receivedMessages);
         return mv;
     }
     @GetMapping("/user/{id}/messages/new")
@@ -58,9 +68,14 @@ public class MessageController {
         message.setBody(messageBody);
         message.setSenderId(id);
         message.setReceiverId(toUser.getId());
-        String url = "http://localhost:8085/messages/new";
-        System.out.println(url);
-        String msg = restTemplate.postForObject(url, message ,String.class);
+//        String url = "http://localhost:8085/messages/new";
+//        System.out.println(url);
+//        String msg = restTemplate.postForObject(url, message ,String.class);
+        Date current_date = new Date();
+        message.setDate(current_date);
+        message.setTime(current_date);
+        messageService.insert(message);
+        System.out.println("Message Created!");
         return "redirect:/";
     }
 }
