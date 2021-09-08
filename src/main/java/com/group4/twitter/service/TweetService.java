@@ -20,9 +20,6 @@ public class TweetService {
     }
 
     public String insert(Tweet tweet){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
-        System.out.println(formatter.format(date));
         dao.save(tweet);
         System.out.println("New tweet: "+tweet);
         return "Successfully added tweet by user: "+tweet.getOwnerID();

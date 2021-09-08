@@ -29,8 +29,9 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/admin").hasAuthority("ADMIN")
-                .antMatchers("/home").hasAuthority("USER")
+//                .antMatchers("/admin").hasAuthority("ADMIN")
+//                .antMatchers("/home").hasAuthority("USER")
+                .antMatchers("/tweet/add").permitAll()
                 .antMatchers("/").permitAll()
                 .and().formLogin();
     }

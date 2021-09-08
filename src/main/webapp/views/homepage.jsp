@@ -20,7 +20,7 @@
         <a class="nav-link" href="#">Messages <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">New Tweet</a>
+        <a class="nav-link" href="tweet/new">New Tweet</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Profile</a>
@@ -35,7 +35,7 @@
 </nav>
 
 <h1 style="text-align:center;padding:20px">
-All Tweets
+${tweets}
 </h1>
 
 </body>
