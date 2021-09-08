@@ -13,7 +13,7 @@ public class TweetsController {
     @Autowired
     TweetService tweetService;
     
-    @GetMapping("/home")
+    @GetMapping("/home1")
     public String test(){
         return "Its working.";
     }

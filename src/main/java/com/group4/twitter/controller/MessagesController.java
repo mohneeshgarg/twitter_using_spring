@@ -5,6 +5,7 @@ import com.group4.twitter.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,9 @@ public class MessagesController {
 
     @PostMapping("user/message/new")
     public void newMessage(@RequestBody Message message){
+        Date current_date = new Date();
+        message.setDate(current_date);
+        message.setTime(current_date);
         messageService.insert(message);
     }
 
