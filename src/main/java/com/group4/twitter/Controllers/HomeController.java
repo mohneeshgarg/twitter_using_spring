@@ -1,7 +1,10 @@
 package com.group4.twitter.Controllers;
 
+import com.group4.twitter.DAO.TweetDAO;
 import com.group4.twitter.DAO.UserDAO;
+import com.group4.twitter.Entities.Tweet;
 import com.group4.twitter.Entities.User;
+import com.group4.twitter.Services.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,11 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class HomeController {
 
     @Autowired
     UserDAO userDAO;
+    @Autowired
+    TweetService tweetService;
 
     @RequestMapping("/")
     public ModelAndView openHome(){
@@ -32,7 +39,9 @@ public class HomeController {
             User user = userDAO.findByUserName(username);
             mv.addObject("id", user.getId());
         }
+        List<Tweet> tweetList = tweetService.getAllTweets();
         mv.addObject("flag",  flag);
+        mv.addObject("tweets", tweetList);
         return mv;
     }
     @RequestMapping("/register")

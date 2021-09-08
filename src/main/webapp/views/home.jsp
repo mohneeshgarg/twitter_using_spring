@@ -12,10 +12,10 @@
     <form action="messages" method="GET">
         <button>Messages</button>
     </form>
-    <form action="/user/${id}/tweet/new">
+    <form action="/tweet/new">
         <button>New Tweet</button>
     </form>
-    <form action="/user/${id}/profile">
+    <form action="/user">
         <button>Profile</button>
     </form>
     <form action="/logout">
@@ -30,6 +30,6 @@
 <h1>
 All Tweets
 </h1>
-
+${tweets}
 </body>
 </html>
