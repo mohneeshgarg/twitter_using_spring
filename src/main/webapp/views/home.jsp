@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,21 @@
 </core:if>
 
 <h1 style="text-align:center;padding:20px">
-All Tweets
+<table border="2" width="70%" cellpadding="2">
+	<tr><th>Tweet</th><th>Owner</th><th>Date</th><th>Time</th></tr>
+<c:forEach items="${tweets}" var="tweets">
+
+    <tr>
+          <td>${tweets.body}</td>
+          <td>${tweets.ownerID}</td>
+          <td>${tweets.date}</td>
+          <td>${tweets.time}</td>
+
+
+    </tr>
+
+</c:forEach>
+</table>
 </h1>
 </body>
 </html>

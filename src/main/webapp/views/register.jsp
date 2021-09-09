@@ -9,7 +9,7 @@
 <title>Register</title>
 </head>
 <body>
-<form action="/user/addUser" method="post">
+<form action="/user/addUser" method="get">
  <div class="form-group">
     <label>Email </label>
     <input type="email" class="form-control" name="userName" aria-describedby="help" placeholder="Enter email" required>
@@ -25,7 +25,7 @@
   </div>
     <div class="form-group">
     <label>Age</label>
-    <input type="number" class="form-control" age="age" placeholder="Enter your age" required>
+    <input type="number" class="form-control" name="age" placeholder="Enter your age" required>
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>

@@ -44,7 +44,6 @@ public class UserController {
                           @RequestParam("age") int age,
                           @RequestParam("password") String password){
         User user = new User(name, age, userName, password);
-        System.out.println(user);
         userService.addUser(user);
         return "redirect:/login";
     }
