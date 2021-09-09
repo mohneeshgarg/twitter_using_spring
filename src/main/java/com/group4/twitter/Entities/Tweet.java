@@ -20,6 +20,8 @@ public class Tweet {
     @Column(name = "owner_id")
     private int ownerID;
 
+    private String ownerName;
+
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     @NotNull
@@ -29,6 +31,14 @@ public class Tweet {
     @Temporal(TemporalType.TIME)
     @NotNull
     private Date time;
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
 
     public Tweet() {};
 

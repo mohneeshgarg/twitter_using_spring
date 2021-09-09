@@ -39,11 +39,6 @@ public class MessageController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = ((UserDetails)auth.getPrincipal()).getUsername();
         User user = userDAO.findByUserName(username);
-//        String url = "http://localhost:8085/user/"+user.getId()+"/";
-//        String sentMessages = restTemplate.getForObject(url+"message/sent", String.class);
-//        String receivedMessages = restTemplate.getForObject(url+"message/received",  String.class);
-//        System.out.println(sentMessages);
-//        System.out.println(receivedMessages);
         List<Message> sentMessages = messageService.findSentMessages(user.getId());
         List<Message> receivedMessages = messageService.findReceivedMessages(user.getId());
         mv.addObject("id", user.getId());
@@ -64,17 +59,12 @@ public class MessageController {
                              @RequestParam("messageBody") String messageBody,
                              @RequestParam("receiver") String receiver){
         User toUser = userDAO.findByUserName(receiver);
-        Message message = new Message();
-        message.setBody(messageBody);
-        message.setSenderId(id);
-        message.setReceiverId(toUser.getId());
-//        String url = "http://localhost:8085/messages/new";
-//        System.out.println(url);
-//        String msg = restTemplate.postForObject(url, message ,String.class);
+        User fromUser = userDAO.findById(id).get();
         Date current_date = new Date();
-        message.setDate(current_date);
-        message.setTime(current_date);
+        Message message = new Message(messageBody, id, toUser.getId(), fromUser.getName(), toUser.getName(), current_date, current_date);
+        System.out.println(toUser.getName());
         messageService.insert(message);
+        System.out.println(message);
         System.out.println("Message Created!");
         return "redirect:/";
     }

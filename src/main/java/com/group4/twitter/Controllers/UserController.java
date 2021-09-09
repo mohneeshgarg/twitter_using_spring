@@ -34,6 +34,7 @@ public class UserController {
 
         User user = userDAO.findByUserName(username);
         List<Tweet> tweets = tweetDAO.findByOwner(user.getId());
+        System.out.println(tweets);
         mv.addObject("tweets", tweets);
         mv.addObject("user", user);
         return mv;

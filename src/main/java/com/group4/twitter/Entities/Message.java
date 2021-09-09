@@ -12,16 +12,15 @@ public class Message {
 
     @Id
     @Column(name = "message_id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int messageId;
-
     private String body;
-
     @Column(name = "sender_id")
     private int senderId;
-
     @Column(name = "receiver_id")
     private int receiverId;
+    private String senderName;
+    private String receiverName;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
@@ -35,13 +34,29 @@ public class Message {
 
     public Message() {};
 
-    public Message(int messageId, String body, int senderId, int receiverId, Date date, Date time) {
-        this.messageId = messageId;
+    public Message(String body, int senderId, int receiverId, String senderName, String receiverName, Date date, Date time) {
         this.body = body;
         this.senderId = senderId;
         this.receiverId = receiverId;
+        this.senderName = senderName;
+        this.receiverName = receiverName;
         this.date = date;
         this.time = time;
+    }
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
     }
 
     public int getMessageId() {

@@ -37,10 +37,16 @@ public class TweetsController {
         String username = ((UserDetails)auth.getPrincipal()).getUsername();
         User user = userDAO.findByUserName(username);
         tweet.setOwnerID(user.getId());
+        tweet.setOwnerName(user.getName());
         tweet.setBody(body);
         tweet.setDate(timeStamp);
         tweet.setTime(timeStamp);
         tweetService.insert(tweet);
+        return "redirect:/";
+    }
+    @GetMapping("/tweet/delete/{id}")
+    public String deleteTweet(@PathVariable int id){
+        tweetService.delete(id);
         return "redirect:/";
     }
 }
