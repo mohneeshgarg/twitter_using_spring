@@ -38,8 +38,13 @@ public class UserController {
         mv.addObject("user", user);
         return mv;
     }
-    @PostMapping("/user/addUser")
-    public String addUser(@RequestBody User user){
+    @GetMapping("/user/addUser")
+    public String addUser(@RequestParam("userName") String userName,
+                          @RequestParam("name") String name,
+                          @RequestParam("age") int age,
+                          @RequestParam("password") String password){
+        User user = new User(name, age, userName, password);
+        System.out.println(user);
         userService.addUser(user);
         return "redirect:/login";
     }

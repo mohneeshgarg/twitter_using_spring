@@ -7,8 +7,9 @@
 <h1><a href="/user/${id}/messages/new">New Message</a></h1><br>
 
 <h2>Message Sent</h2><br>
+${sent}
 <br>
 <h2>Message Recieved</h2><br>
-
+${received}
 </body>
 </html>

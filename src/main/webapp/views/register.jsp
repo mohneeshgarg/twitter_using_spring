@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>Add new Student</h2>
-<form action="/user/addUser" method="post">
+<form action="/user/addUser">
 
 Email:<input type="email" name="userName" /> <br>
 Name:<input type="text" name="name" /> <br>
