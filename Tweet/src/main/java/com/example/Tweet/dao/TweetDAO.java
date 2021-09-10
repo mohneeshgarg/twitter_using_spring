@@ -14,6 +14,6 @@ import java.util.List;
 @Repository
 public interface TweetDAO extends JpaRepository<Tweet, Integer> {
 
-    @Query(value="SELECT * FROM twitter_tweet WHERE owner_id = :owner_id", nativeQuery = true)
+    @Query(value="SELECT * FROM twitter_tweet WHERE owner_id = :owner_id order by date desc,time desc", nativeQuery = true)
     List<Tweet> findByOwner(@Param("owner_id") int owner_email);
 }
